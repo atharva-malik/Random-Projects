@@ -26,7 +26,6 @@ else:
     print(f"Welcome back {username}")
 
 api_key = 'ENTER_YOUR_API_KEY_HERE'
-api_key = 'Q38KXAMESHWB6PGC'
 
 def get_current_stock_price(symbol):
     function = 'GLOBAL_QUOTE'
@@ -45,15 +44,15 @@ def get_current_stock_price(symbol):
         print(f"Error retrieving stock price: {e}")
         return None
 
-def addStock(symbol, name, amount):
+def addStock(symbol, name, amount, price):
     global portfolio
     for i in portfolio:
-        if i["symbol"] == symbol and i["name"] == name:
+        if i["symbol"] == symbol and i["price"] == price:
             i["amount"] += amount
             if i["amount"] == 0:
                 portfolio.remove(i)
             return
-    portfolio.append({"symbol": symbol, "name": name, "amount": amount})
+    portfolio.append({"symbol": symbol, "name": name, "amount": amount, "price": price})
 
 def get_symbol(company):
     try:
@@ -100,10 +99,8 @@ while True:
     #! Handle user input
     if op == 1:
         company = input("Enter a stock symbol/company name: ")
-        symbol, name = "AAPL", "Apple Inc"
-        price = 226.34
-        # symbol, name = get_symbol(company)
-        # price = get_current_stock_price(symbol)
+        symbol, name = get_symbol(company)
+        price = get_current_stock_price(symbol)
         if price is None:
             print("Error retrieving stock price. Please try again later.")
             continue
@@ -130,26 +127,26 @@ while True:
         portfolio_value = round(portfolio_value, 2)
         spare_money -= price * op
         spare_money = round(spare_money, 2)
-        addStock(symbol=symbol, name=name, amount=op)
+        addStock(symbol=symbol, name=name, amount=op, price=price)
     elif op == 2:
         if len(portfolio) == 0:
             print("You have no stocks to sell.")
             continue
         print("Enter the number of the stock you want to sell:")
         for i, stock in enumerate(portfolio):
-            print(f"{i+1}. {stock['symbol']} - {stock['name']}: {stock['amount']}")
+            print(f"{i+1}. {stock['amount']} x {stock['symbol']} - {stock['name']} which you bought at {stock['price']}")
         while True:
             try:
                 index = int(input("> ")) - 1
                 if index < 0 or index >= len(portfolio):
                     raise ValueError
-                symbol = portfolio[index]['symbol']
-                name = portfolio[index]['name']
-                price = 390.34
-                # price = get_current_stock_price(symbol)
+                stock = portfolio[index]
+                symbol = stock['symbol']
+                name = stock['name']
+                og_price = stock['price']
+                price = get_current_stock_price(symbol)
                 print(f"Currently, {symbol} is going for {price}")
                 print("How many stocks do you want to sell?")
-                stock = portfolio[index]
                 while True:
                     try:
                         op = int(input("> "))
@@ -159,11 +156,11 @@ while True:
                     except ValueError:
                         print(f"Invalid input. Please enter a number between 0 and {stock['amount']}.")
                         continue
-                addStock(symbol=symbol, name=name, amount=-op)
-                portfolio_value -= (price * op)
+                addStock(symbol=symbol, name=name, amount=-op, price=og_price)
+                portfolio_value -= og_price * op
                 portfolio_value = round(portfolio_value, 2)
-                print((price * op)*0.0075)
-                spare_money += (price * op) - (price * op)*0.0075
+                spare_money += og_price * op
+                spare_money += ((price-og_price) * op) - ((price-og_price) * op)*0.0075
                 spare_money = round(spare_money, 2)
                 print(f"You sold {op} of {symbol} at {price} each. A transaction fee of 0.75% has been deducted.\nYou have {spare_money+portfolio_value} left.")
                 break
