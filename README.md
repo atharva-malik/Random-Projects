@@ -11,3 +11,4 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * An app to remind you to get up and drink water 
 * Minimax Tic Tac Toe bot
 * Alarm clock
+* Minesweeper in the terminal
