@@ -100,7 +100,7 @@ while True:
     if op == 1:
         company = input("Enter a stock symbol/company name: ")
         symbol, name = get_symbol(company)
-        price = get_current_stock_price(symbol)
+        price = round(float(get_current_stock_price(symbol)),2)
         if price is None:
             print("Error retrieving stock price. Please try again later.")
             continue
