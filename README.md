@@ -9,3 +9,5 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * A 2 player chess game that you can play in terminal
 * A script to solve patter recognition maths problems
 * An app to remind you to get up and drink water 
+* Minimax Tic Tac Toe bot
+* Alarm clock
