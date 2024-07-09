@@ -6,3 +6,6 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * A stock trading game
 * A YouTube botter
 * A copy of the beep test (Sport.py)
+* A 2 player chess game that you can play in terminal
+* A script to solve patter recognition maths problems
+* An app to remind you to get up and drink water 
