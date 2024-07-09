@@ -12,3 +12,4 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * Minimax Tic Tac Toe bot
 * Alarm clock
 * Minesweeper in the terminal
+* Tetris pygame
