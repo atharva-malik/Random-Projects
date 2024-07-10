@@ -13,3 +13,5 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * Alarm clock
 * Minesweeper in the terminal
 * Tetris pygame
+* Simple calculator
+* Simple rock paper scissor bot
