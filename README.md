@@ -17,3 +17,4 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * Simple rock paper scissor bot
 * Minimax connect 4 bot
 * Markov text generator
+* A web automater
