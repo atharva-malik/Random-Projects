@@ -50,3 +50,6 @@ Input is hard
 
 Arithmetic and Type Casting:
 You can use _'s in numbers to make them more readable: 127_000 is the same as 127000
+
+Conditions and control flow:
+See notes for c++. Rust is basically python+c++.
