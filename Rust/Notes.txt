@@ -1,3 +1,4 @@
+Project Creation and Management:
 Create project by running `cargo new <project name (name should be snakeCase)>`
 Build project by running `cargo build` in the project root directory.
 Run project by running `cargo run` in the project root directory.
@@ -5,3 +6,31 @@ Run project by running `cargo run` in the project root directory.
 To 'check' your project, run `cargo check` in the project root directory. This will check for errors without building the project.
 
 Format your code automatically by `rustfmt <pathToFile>`
+
+Variables Constants and Shadowing:
+Variables are immutable by default. To make a variable mutable, use the `mut` keyword.
+Use `let` to implicitly declare a variable.
+To explicitly declare a type:
+    let <variableName>: <type> = <value>
+    let x: i32 = 5; // X, of type 32-bit int, is set to 5.
+
+We can create a scope by simply using {} and everything in there will be part of that scope only.
+
+Data Types:
+The primitive data types are as follows:
+    Integers (default is i32):
+        i8, i16, i32, i64, i128 (Signed)
+        u8, u16, u32, u64, u128 (Unsigned)
+    Floats (default is f64):
+        f32: Single precision
+        f64: Double precision
+    Booleans:
+        bool: true or false
+        You could also use 1 or 0 to represent true or false.
+    char:
+        Any single character. REMEMBER TO USE SINGLE QUOTATIONS
+    
+    Tuple (Defined tup) :
+        let tup = (value1, value2, value3)
+        Types are weird with tuples. The type of above tuple is: (typeof(value1), typeof(value2), typeof(value3))
+    
