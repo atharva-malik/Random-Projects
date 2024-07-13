@@ -1,0 +1,7 @@
+Create project by running `cargo new <project name (name should be snakeCase)>`
+Build project by running `cargo build` in the project root directory.
+Run project by running `cargo run` in the project root directory.
+
+To 'check' your project, run `cargo check` in the project root directory. This will check for errors without building the project.
+
+Format your code automatically by `rustfmt <pathToFile>`
