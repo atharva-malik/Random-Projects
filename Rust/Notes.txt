@@ -30,7 +30,23 @@ The primitive data types are as follows:
     char:
         Any single character. REMEMBER TO USE SINGLE QUOTATIONS
     
-    Tuple (Defined tup) :
+    Tuple (Defined tup) REMEMBER TUPLES ARE FIXED LENGTH:
         let tup = (value1, value2, value3)
         Types are weird with tuples. The type of above tuple is: (typeof(value1), typeof(value2), typeof(value3))
-    
+
+        To access elements of a tuple, use the dot operator: tup.0, tup.1, tup.2, etc.
+        Or this: println!("The value of tup is: {:?}", tup);
+    Array (Defined as Python's list) ALL MUST BE OF SAME TYPE. REMEMBER ARRAYS ARE ALSO FIXED LENGTH:
+        REMEMBER THAT VALUES ARE NOT AUTOMATICALLY ASSIGNED.
+        let arr: [(typeOfValuesStored; lengthOfArray)] = [value1, value2, value3]
+        let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+        To access elements of an array, use the square brackets: arr[0], arr[1], arr[2], etc.
+        Or this: println!("The value of arr is: {:?}", arr);
+
+Console Input:
+Prelude: A bunch of functionality automatically added to every rust project.
+Input is hard
+
+Arithmetic and Type Casting:
+You can use _'s in numbers to make them more readable: 127_000 is the same as 127000
