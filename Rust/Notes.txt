@@ -53,3 +53,19 @@ You can use _'s in numbers to make them more readable: 127_000 is the same as 12
 
 Conditions and control flow:
 See notes for c++. Rust is basically python+c++.
+
+Memory management, heap and stack:
+- Stack is the fastest memory we have
+- Stacks are LiFo
+- Only fixed size objects are stored in stack
+- Heap is slower than stack
+- Stacks are used for local variables and function arguments
+- Heap on the other hand can store more data than stack
+- They can also store variable data
+- String vs &str:
+    &str is immutable and is therefore stored on stack
+    String on the other hand, is mutable, and is stored in heap
+    When storing strings, the variable is stored in the stack, where the value is a pointer to a memory
+    address to the heap, and the actual value is mapped to the pointer.
+
+Just try and use the stack
