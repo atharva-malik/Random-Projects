@@ -9,6 +9,7 @@ const player = "p"
 const walls = "w"
 const wallsL = "L"
 const wallsR = "R"
+const invisWall = "i"
 
 setLegend(
   [ player, bitmap`
@@ -79,26 +80,56 @@ LLLLLLLLLLLLLLLL
 ................
 ................
 ................` ], 
+  [ invisWall, bitmap`
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222
+2222222222222222` ]
 )
 
-setSolids([ player, walls, wallsL, wallsR ])
+setSolids([ player, walls, wallsL, wallsR, invisWall ])
 
-let level = 0
+let go = false;
+let gameIsOn = false;
 const levels = [
   map`
-.....p.....
+...........
 wwwwL.Rwwww
 ...........
 wwwL.Rwwwww
-...........
+p..........
 wwwwwwwwwL.
 ...........
 .Rwwwwwwwww
 ...........
-wwwwwL.Rwww`
+iiiiiiiiiii`,
+  map`
+...........
+...........
+...........
+...........
+...........
+....iii....
+....ipi....
+....iii....
+...........
+...........`,
 ]
 
-setMap(levels[level])
+// setMap(levels[level])
+setLevel(1, "Press J to start", "/reset!")
 
 setPushables({
   [ walls ]: [ player ],
@@ -107,13 +138,42 @@ setPushables({
 })
 
 function wallUpdate(){
-  moveWallsUp()
-  // killRedundantWalls()
-  spawnMoreWalls()
+  if (gameIsOn){
+    moveWallsUp();
+    // killRedundantWalls()
+    spawnMoreWalls();
+  }
+}
+
+function setLevel(l, text1="", text2=""){
+  clearText();
+  setMap(levels[l])
+  if (text1!=""){
+    addText(text1, {
+      x: 1,
+      y: 1,
+      color: color`3`
+    })
+  }
+  if (text2!=""){
+    addText(text2, {
+      x: 1,
+      y: 4,
+      color: color`7`
+    })
+  }
 }
 
 function checkIfWallNeeded(){ // 8
   for (let i = 0; i < 11; i++){
+    if (getTile(i, 8).length > 1){
+      let type = getTile(i, 8)[0]['_type']
+      let type2 = getTile(i, 8)[1]['_type']
+      for (let letter of ["w", "L", "R"]){
+        if (type == letter || type1 == letter)
+          return false;
+      }
+    }
     if (getTile(i, 8).length > 0){
       let type = getTile(i, 8)[0]['_type']
       for (let letter of ["w", "L", "R"]){
@@ -128,13 +188,27 @@ function checkIfWallNeeded(){ // 8
 function spawnMoreWalls(){
   if (checkIfWallNeeded()){
     let x = randint(10); // 0-10
-    if (x == 0){} // Speacial case!
-    else if (x == 10){} // Speacial case!
+    if (x == 0){
+      addSprite(1, 9, wallsR);
+      for (let i = 2; i < 11; i++){
+        addSprite(i, 9, walls);
+      }
+    } // Speacial case!
+    else if (x == 10){
+      for (let i = 0; i < 9; i++){
+        addSprite(i, 9, walls);
+      }
+      addSprite(9, 9, wallsL);
+    } // Speacial case!
     else {
       for (let i = 0; i < x-1; i++){
         addSprite(i, 9, walls);
       }
-      addSprite(x-1, 9, wallsL)
+      addSprite(x-1, 9, wallsL);
+      addSprite(x+1, 9, wallsR);
+      for (let i = x+2; i < 11; i++){
+        addSprite(i, 9, walls);
+      }
     }
   }
 }
@@ -154,23 +228,69 @@ function moveWallsUp(){
   }
 }
 
+function playerUpdate(){
+  fixGlitch();
+  gravity();
+}
+
+function fixGlitch(){
+  if (checkForGlitch()){
+    
+  }
+}
+
+function checkBelowPlayer(){
+  let pl = getFirst(player)
+  if (getTile(pl.x, pl.y+1).length > 0){
+    return false;
+  }
+  return true;
+}
+
+function gravity(){
+  if (checkBelowPlayer()){
+    getFirst(player).y += 1;
+  }
+}
+
 function randint(max) {
   return Math.floor(Math.random() * max);
 }
 
-let wallUpdateInt = setInterval(wallUpdate, 2000);
-// let wallUpdateInt = setInterval(wallUpdate, 750);
-// let playerUpdateInt = setInterval(playerUpdate, 200);
+function gameUpdate(){
+  if (go){
+    wallUpdate();
+    // getInput();
+    go = false;
+  }else{go=true;}
+  playerUpdate();
+}
 
-onInput("s", () => {
-  getFirst(player).y += 1
-})
+function getInput(){
+  onInput("a", () => {
+    getFirst(player).x -= 1;
+  })
+  onInput("d", () => {
+    getFirst(player).x += 1;
+  })
+  onInput("j", () => {
+    setLevel(0);
+    gameIsOn = true;
+  })
+}
+
+// let wallUpdateInt = setInterval(wallUpdate, 2000);
+// let playerUpdateInt = setInterval(playerUpdate, 2000);
+// let wallUpdateInt = setInterval(wallUpdate, 750);
+// let playerUpdateInt = setInterval(playerUpdate, 500);
+let gameUpdateInt = setInterval(gameUpdate, 375);
 onInput("a", () => {
   getFirst(player).x -= 1;
 })
 onInput("d", () => {
   getFirst(player).x += 1;
 })
-afterInput(() => {
-  
+onInput("j", () => {
+  setLevel(0);
+  gameIsOn = true;
 })
