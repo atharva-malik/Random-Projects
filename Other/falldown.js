@@ -103,17 +103,19 @@ setSolids([ player, walls, wallsL, wallsR, invisWall ])
 
 let go = false;
 let gameIsOn = false;
+let score = 0;
 const levels = [
   map`
 ...........
+.....p.....
 wwwwL.Rwwww
 ...........
 wwwL.Rwwwww
-p..........
+...........
 wwwwwwwwwL.
 ...........
 .Rwwwwwwwww
-...........
+iiiiiiiiiii
 iiiiiiiiiii`,
   map`
 ...........
@@ -187,6 +189,7 @@ function checkIfWallNeeded(){ // 8
 
 function spawnMoreWalls(){
   if (checkIfWallNeeded()){
+      score += 1;
     let x = randint(10); // 0-10
     if (x == 0){
       addSprite(1, 9, wallsR);
@@ -229,13 +232,67 @@ function moveWallsUp(){
 }
 
 function playerUpdate(){
+  let pl = getFirst(player);
   fixGlitch();
   gravity();
+  checkLoose();
+}
+
+function checkLoose(){
+  if (gameIsOn){
+    if (getFirst(player).y == 0){
+      setLevel(1, "Game Over!", "Score: " + score.toString());
+      gameIsOn = false;
+      score = 0;
+    }
+  }
+}
+
+function checkForGlitch(){
+  if (!gameIsOn){
+    return false;
+  }
+  let pl = getFirst(player)
+  let a = !checkBelowPlayer()
+  let b = false;
+  let c = false;
+  if (getTile(pl.x-1, pl.y).length > 0){
+    b = true;
+  }
+  if (getTile(pl.x+1, pl.y).length > 0){
+    c = true;
+  }
+  if (a && b && c){
+    return true;
+  }
+  return false;
+  // if (!gameIsOn){
+  //   return false;
+  // }
+  // let found_wall = 0;
+  // for (let i = 0; i < 11; i++){
+  //   if (getTile(i, pl).length > 0){
+  //     found_wall += 1;
+  //   }
+  // }
+  // if (found_wall == 1){
+  //   return false;
+  // }
+  // return true;
 }
 
 function fixGlitch(){
+  let pl = getFirst(player);
   if (checkForGlitch()){
-    
+    console.log("GLITCH DETECTED");
+    // if (checkBelowPlayer)
+    // {
+    console.log("FIXING GLITCH");
+    // FIX THE GLITCH()
+    // clearTile(pl.x, pl.y-1);
+    // addSprite(pl.x, pl.y, walls);
+    pl.y -= 1;
+    pl.x += 1;
   }
 }
 
