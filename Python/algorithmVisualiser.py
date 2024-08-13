@@ -54,6 +54,32 @@ def print_board(board):
         i += 1
     print(return_board)
 
+def find_tile_pos(board, tile):
+    for i in range(20):
+        for j in range(20):
+            if board[i][j] == tile:
+                return i, j
+    return -1, -1
+
+def change_tile(board, tile, x=-1, y=-1):
+    if x < 0:
+        x, y = find_tile_pos(board, tile)
+    board[x][y] = tile
+
+def get_int_coords():
+    print_board(board)
+    try:
+        x = int(input("Enter x coordinate: "))
+        y = int(input("Enter y coordinate: "))
+    except ValueError:
+        print(red("NaN!", "bold"))
+        return -1, -1
+    if x < 0 or y < 0 or x > 19 or y > 19:
+        print(red("Invalid coordinates!", "bold"))
+        return -1, -1
+    return x, y
+
+
 if __name__ == "__main__":
     clear()
     while True:
@@ -70,22 +96,22 @@ if __name__ == "__main__":
                 clear()
                 keyboard.press('backspace')
             elif keyboard.is_pressed('w'):
-                #TODO add wall insertion logic
                 keyboard.press('backspace')
+                x,y  = get_int_coords()
+                if x < 0:
+                    continue
+                change_tile(board, "w", x, y)
             elif keyboard.is_pressed('s'):
-                #TODO add start point pos change logic
                 keyboard.press('backspace')
+                print_board(board)
             elif keyboard.is_pressed('e'):
-                #TODO add end point pos change logic
                 keyboard.press('backspace')
             elif keyboard.is_pressed('b'):
-                #TODO add BFS logic
+                bfs(board)
                 keyboard.press('backspace')
             elif keyboard.is_pressed('d'):
-                #TODO add DFS logic
                 keyboard.press('backspace')
             elif keyboard.is_pressed('a'):
-                #TODO add A* logic
                 keyboard.press('backspace')
             elif keyboard.is_pressed('q'):
                 clear()
