@@ -79,6 +79,14 @@ def get_int_coords():
         return -1, -1
     return x, y
 
+def bfs(board):
+    pass # https://youtu.be/pcKY4hjDrxk?t=364
+
+def dfs(board):
+    pass
+
+def a_star(board):
+    pass
 
 if __name__ == "__main__":
     clear()
@@ -104,14 +112,29 @@ if __name__ == "__main__":
             elif keyboard.is_pressed('s'):
                 keyboard.press('backspace')
                 print_board(board)
+                x,y  = get_int_coords()
+                if x < 0:
+                    continue
+                x1, y1 = find_tile_pos(board, "s")
+                change_tile(board, ".", x1, y1)
+                change_tile(board, "s", x, y)
             elif keyboard.is_pressed('e'):
                 keyboard.press('backspace')
+                print_board(board)
+                x,y  = get_int_coords()
+                if x < 0:
+                    continue
+                x1, y1 = find_tile_pos(board, "e")
+                change_tile(board, ".", x1, y1)
+                change_tile(board, "e", x, y)
             elif keyboard.is_pressed('b'):
                 bfs(board)
                 keyboard.press('backspace')
             elif keyboard.is_pressed('d'):
+                dfs(board)
                 keyboard.press('backspace')
             elif keyboard.is_pressed('a'):
+                a_star(board)
                 keyboard.press('backspace')
             elif keyboard.is_pressed('q'):
                 clear()
