@@ -1,6 +1,3 @@
-# Hi today we will be making the game of rock, paper, scissors for beginners in python !!
-
-# Let us start by importing some libraries.
 import random
 
 #Here we will write our programs

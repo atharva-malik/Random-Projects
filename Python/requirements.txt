@@ -1,0 +1,14 @@
+webbrowser
+winsound
+simple_colors
+speech_recognition
+google-generativeai
+chess
+plyer
+markovify
+pygame
+gtts
+selenium
+bs4
+requests
+pprint

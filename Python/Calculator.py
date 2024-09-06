@@ -1,5 +1,3 @@
-# How to make a calculator in python. Part 3
-
 while True:
     try:
         num1 = eval(input("Enter a number: \n"))
