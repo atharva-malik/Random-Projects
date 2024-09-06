@@ -18,3 +18,11 @@ In this repository, there are a bunch of random projects that I wanted to make b
 * Minimax connect 4 bot
 * Markov text generator
 * A web automater
+
+## How to Run + Images (Sorted by folder)
+### Other:
+#### falldown.js:
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/edfa1073-e6f0-4b54-88f4-ca4680ad51cb" />
+</p>
+This game was made for the [Sprig](https://sprig.hackclub.com/) console and can be easily run be uploading to the sprig editor, or by searching through the gallery for "Falldown Mini"!
