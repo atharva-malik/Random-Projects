@@ -27,3 +27,8 @@ In this repository, there are a bunch of random projects that I wanted to make b
 </p>
 
 This game was made for the [Sprig](https://sprig.hackclub.com/) console and can be easily run be uploading to the sprig editor, or by searching through the gallery for "Falldown Mini"!
+
+### Python:
+```bash
+pip install -r requirements.txt
+```
