@@ -42,3 +42,8 @@ I have provided image for the graphic applications:
 #### Wordle (Terminal Application):
 ![image](https://github.com/user-attachments/assets/be4c7c1d-a331-4b3f-9636-8ab7d37807f8)
 
+### Rust:
+To run the Rust projects, cd in to the directory and run:
+`cargo run`
+
+Sadly none of the projects I made with Rust are graphic projects, and they are all terminal applications instead
