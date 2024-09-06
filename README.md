@@ -28,4 +28,4 @@ In this repository, there are a bunch of random projects that I wanted to make b
 This game was made for the [Sprig] console and can be easily run be uploading to the sprig editor, or by searching through the gallery for "Falldown Mini"!
 
 [//]:
-  [Sprig]: (https://sprig.hackclub.com/)
+  [Sprig]: <https://sprig.hackclub.com/>
